@@ -1,0 +1,47 @@
+{
+  "name": "all4all_gare",
+  "version": "0.0.1",
+  "description": "Iscrizione gare ALL4ALL",
+  "productName": "ALL4ALL - Gare",
+  "cordovaId": "",
+  "author": "Matteo Piazza <matteo.piazza@gmail.com>",
+  "private": true,
+  "scripts": {
+    "dev__NO-PWA": "quasar dev",
+    "build__NO-PWA": "quasar build",
+    "dev": "quasar dev -m pwa",
+    "build": "quasar build -m pwa",
+    "dev:serveo": "ssh -R all4all:80:localhost:8080 serveo.net",
+    "lint": "eslint --ext .js,.vue src",
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.2.0",
+    "axios": "^0.19.0",
+    "firebase": "^6.4.2",
+    "polyfill-object.fromentries": "^1.0.1",
+    "quasar": "^1.0.5"
+  },
+  "devDependencies": {
+    "@quasar/app": "^1.0.4",
+    "@quasar/quasar-app-extension-dotenv": "^1.0.0-beta.10",
+    "@quasar/quasar-app-extension-icon-genie": "^1.0.1",
+    "@vue/eslint-config-airbnb": "^4.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.10.0",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-vue": "^5.0.0",
+    "strip-ansi": "=3.0.1"
+  },
+  "engines": {
+    "node": ">= 8.9.0",
+    "npm": ">= 5.6.0",
+    "yarn": ">= 1.6.0"
+  },
+  "browserslist": [
+    "last 1 version, not dead, ie >= 11"
+  ],
+  "resolutions": {
+    "ajv": "6.8.1"
+  }
+}

@@ -1,0 +1,23 @@
+// app global css
+.races-RouterLink {
+	padding: 0 0 4px 0;
+
+	&:link,
+	&:active,
+	&:focus,
+	&:visited {
+		color: $light-blue-9;
+		text-decoration: underline;
+		display: inline-block;
+	}
+
+	&:hover {
+		color: darken($light-blue-9, 30%);
+	}
+}
+
+.mandatory-field .q-field__label:after,
+.mandatory-field .q-tab__label:after {
+	content: " *";
+	color: $red;
+}

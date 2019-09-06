@@ -7,16 +7,18 @@ export default {
 
   actions: {
     login: () => {
-      return new Promise((resolve, reject) => {
-        firebase.auth().onAuthStateChanged((user) => {
+      return new Promise((resolve, /* reject */) => {
+        firebase.auth().onAuthStateChanged(async (user) => {
           if (user) {
             resolve(user);
           } else {
-            reject(new Error('not authorized'));
+            await firebase.auth().signInAnonymously();
+            // reject(new Error('not authorized'));
           }
         });
-        firebase.auth().signInAnonymously();
-      }).catch((error) => { console.log('%c %s', 'color:red; font-weight:bold;', `>>> Firebase authentication: ${error.message} <<<`); });
+      }).catch((error) => {
+        console.log('%c %s', 'color:red; font-weight:bold;', `>>> Firebase authentication: ${error.message} <<<`);
+      });
     }
   },
 

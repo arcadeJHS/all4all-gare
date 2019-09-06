@@ -56,7 +56,7 @@ export default {
     };
   },
   mounted() {
-    this.getRaces();
+    this.init();
   },
   computed: {
     races() {
@@ -64,6 +64,10 @@ export default {
     }
   },
   methods: {
+    async init() {
+      await this.$store.dispatch('auth/login');
+      this.getRaces();
+    },
     async getRaces() {
       this.isLoading = true;
       await this.$store.dispatch('races/get');

@@ -56,7 +56,7 @@ export default {
     };
   },
   mounted() {
-    this.init();
+    this.getRaces();
   },
   computed: {
     races() {
@@ -64,14 +64,10 @@ export default {
     }
   },
   methods: {
-    async init() {
-      this.isLoading = true;
-      await this.$store.dispatch('auth/login');
-      await this.getRaces();
-      this.isLoading = false;
-    },
     async getRaces() {
+      this.isLoading = true;
       await this.$store.dispatch('races/get');
+      this.isLoading = false;
     },
     dateLabel(timestamp) {
       return date.formatDate(new Date(timestamp.toDate()), 'DD MMMM');

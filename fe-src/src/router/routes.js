@@ -1,6 +1,6 @@
 import AppLayout from 'layouts/AppLayout/index.vue';
+import Auth from 'pages/Auth/index.vue';
 import Races from 'pages/Races/index.vue';
-import Runners from 'pages/Runners/index.vue';
 
 const defaultRedirect = '/races';
 
@@ -12,20 +12,28 @@ const routes = [
     redirect: defaultRedirect,
     children: [
       {
+        path: '/auth',
+        name: 'auth',
+        component: Auth
+      },
+      {
         path: '/races',
         name: 'races',
-        component: Races
+        component: Races,
+        meta: { auth: true }
       },
       {
         path: '/runners',
         name: 'runners',
-        component: Runners
+        component: () => import('pages/Runners/index.vue'),
+        meta: { auth: true }
       },
       {
         path: '/runners/:id?',
         name: 'runners_list',
-        props: true,
-        component: () => import('pages/Runners/RunnersList.vue')
+        component: () => import('pages/Runners/RunnersList.vue'),
+        meta: { auth: true },
+        props: true
       }
     ]
   },

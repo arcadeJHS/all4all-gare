@@ -2,13 +2,15 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import auth from './auth.js';
 import races from './races.js';
+import runners from './runners.js';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
     auth,
-    races
+    races,
+    runners
   },
 
   // enable strict mode (adds overhead!)

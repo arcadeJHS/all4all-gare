@@ -29,6 +29,7 @@
           :options="yearOptions"
           label="Anno di nascita">
         </q-select>
+        <!--
         <q-select
           class="mandatory-field"
           v-model="runner.sex"
@@ -37,6 +38,7 @@
           emit-value>
         </q-select>
         <q-input v-model="runner.nationality" label="Nazionalità" />
+        -->
         <q-select
           flat
           v-model="runner.shirtSize"
@@ -49,22 +51,20 @@
 
       <q-card-actions align="right" class="bg-white races-SubscriptionDialog__actions" style="margin-top: auto;">
         <q-btn flat label="Cancel" color="grey" @click="onCancel" />
-        <q-btn flat label="Conferma" color="primary" @click="onOK" :disabled="!isValidProfile" />
+        <q-btn flat label="Conferma" color="primary" @click="onOK" :disabled="!isValidProfile" :loading="isSaving" />
       </q-card-actions>
     </q-card>
   </q-dialog>
 </template>
 
 <script>
-import * as firebase from 'firebase/app';
-import 'firebase/firestore';
-
 export default {
   name: 'SubscriptionDialog',
   props: ['race'],
   data() {
     return {
       isDesktop: this.$q.platform.is.desktop,
+      isSaving: false,
       sexOptions: [
         {
           label: 'M',
@@ -111,7 +111,7 @@ export default {
   },
   computed: {
     isValidProfile() {
-      return !!this.runner.firstName && !!this.runner.lastName && !!this.runner.yearOfBirth && !!this.runner.sex;
+      return !!this.runner.firstName && !!this.runner.lastName && !!this.runner.yearOfBirth;
     }
   },
   methods: {
@@ -136,7 +136,9 @@ export default {
       this.hide();
     },
     async onOK() {
+      this.isSaving = true;
       await this.saveProfile();
+      this.isSaving = false;
       this.confirmSuccess();
       this.$emit('ok');
       this.hide();
@@ -145,20 +147,8 @@ export default {
       this.$emit('hide');
     },
     async saveProfile() {
-      const db = firebase.firestore();
       const id = `${this.runner.race}_${this.runner.firstName.toLowerCase()}_${this.runner.lastName.toLowerCase()}_${this.runner.yearOfBirth}`;
-      const docRef = db.collection('runners').doc(id);
-      const runnerRef = await docRef.get();
-
-      // verifiy if runner already exists
-      if (runnerRef.exists) {
-        // exists: UPDATE
-        // improve: NOTIFY user for existing item
-        await docRef.update(this.runner);
-      } else {
-        // does not exists: CREATE
-        await docRef.set(this.runner);
-      }
+      await this.$store.dispatch('runners/saveRunner', { id, runner: this.runner });
     },
     confirmSuccess() {
       this.$q.notify({

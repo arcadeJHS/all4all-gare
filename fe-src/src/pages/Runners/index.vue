@@ -27,7 +27,6 @@ export default {
   },
   data() {
     return {
-      isDesktop: this.$q.platform.is.desktop,
       isLoading: false
     };
   },

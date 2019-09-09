@@ -147,8 +147,8 @@ export default {
       this.$emit('hide');
     },
     async saveProfile() {
-      const id = `${this.runner.race}_${this.runner.firstName.toLowerCase()}_${this.runner.lastName.toLowerCase()}_${this.runner.yearOfBirth}`;
-      await this.$store.dispatch('runners/saveRunner', { id, runner: this.runner });
+      const runnerId = `${this.runner.race}_${this.runner.firstName.toLowerCase()}_${this.runner.lastName.toLowerCase()}_${this.runner.yearOfBirth}`;
+      await this.$store.dispatch('runners/saveRunner', { runnerId, runner: this.runner });
     },
     confirmSuccess() {
       this.$q.notify({

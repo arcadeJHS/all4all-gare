@@ -29,7 +29,7 @@ const routes = [
         meta: { auth: true }
       },
       {
-        path: '/runners/:id?',
+        path: '/runners/:raceId?',
         name: 'runners_list',
         component: () => import('pages/Runners/RunnersList.vue'),
         meta: { auth: true },

@@ -6,8 +6,8 @@ export default {
   state: {},
 
   actions: {
-    saveRunner: async (store, { id, runner }) => {
-      const docRef = firestore.collection('runners').doc(id);
+    saveRunner: async (store, { runnerId, runner }) => {
+      const docRef = firestore.collection('runners').doc(runnerId);
       const runnerRef = await docRef.get();
 
       // verifiy if runner already exists
@@ -18,6 +18,20 @@ export default {
         // does not exists: CREATE
         await docRef.set(runner);
       }
+    },
+
+    getRunnersByRace: async (store, raceId) => {
+      const data = await firestore.collection('runners').where('race', '==', raceId).get();
+
+      const runners = [];
+      data.forEach((doc) => {
+        runners.push({
+          id: doc.id,
+          ...doc.data()
+        });
+      });
+
+      return runners;
     }
   },
 

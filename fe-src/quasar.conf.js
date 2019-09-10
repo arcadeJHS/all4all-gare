@@ -86,7 +86,8 @@ module.exports = function (ctx) {
         'QScrollArea',
         'QTooltip',
         'QCheckbox',
-        'QBtnToggle'
+        'QBtnToggle',
+        'QMarkupTable'
       ],
 
       directives: [

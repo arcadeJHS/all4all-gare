@@ -6,9 +6,14 @@
         <load-spinner v-if="isLoading" class="bg-white"></load-spinner>
 
         <div v-if="!isLoading" class="q-pa-md">
-          <p v-for="race in races" :key="race.id">
-            <router-link class="races-RouterLink" @click.native="$event.stopImmediatePropagation()" :to="`/runners/${race.id}`">{{dateLabel(race.date)}} - {{race.name}}</router-link>
-          </p>
+          <q-markup-table dense flat bordered>
+            <thead></thead>
+            <tbody>
+              <tr v-for="race in races" :key="race.id" @click="openRacePage(`/runners/${race.id}`)" class="races-Runners__race">
+                <td>{{dateLabel(race.date)}} - {{race.name}}</td>
+              </tr>
+            </tbody>
+          </q-markup-table>
         </div>
 
       </q-page>
@@ -17,7 +22,7 @@
 </template>
 
 <script>
-import { date, openURL } from 'quasar';
+import { dateLabel } from 'src/commons/services/Utils';
 import LoadSpinner from 'src/commons/components/LoadSpinner.vue';
 
 export default {
@@ -44,12 +49,16 @@ export default {
       await this.$store.dispatch('races/get');
       this.isLoading = false;
     },
-    dateLabel(timestamp) {
-      return date.formatDate(new Date(timestamp.toDate()), 'DD MMMM');
-    },
-    openRacePage(url) {
-      openURL(url);
+    dateLabel,
+    openRacePage(path) {
+      this.$router.push({ path });
     }
   }
 };
 </script>
+
+<style>
+.races-Runners__race {
+  cursor: pointer;
+}
+</style>

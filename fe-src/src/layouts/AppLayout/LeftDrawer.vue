@@ -10,7 +10,7 @@
         <q-icon name="accessible_forward" size="2rem" />
       </q-item-section>
       <q-item-section>
-        <q-item-label>Prossimi Eventi</q-item-label>
+        <q-item-label>Iscrizione Eventi</q-item-label>
       </q-item-section>
     </q-item>
 

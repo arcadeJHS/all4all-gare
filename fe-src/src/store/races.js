@@ -28,6 +28,7 @@ export default {
   },
 
   getters: {
-    races: state => state.races
+    races: state => state.races,
+    raceById: state => id => state.races.find(r => r.id === id)
   }
 };

@@ -41,6 +41,7 @@
 
 <script>
 import { date, openURL } from 'quasar';
+import { dateLabel } from 'src/commons/services/Utils';
 import LoadSpinner from 'src/commons/components/LoadSpinner.vue';
 import SubscriptionDialog from './SubscriptionDialog.vue';
 
@@ -69,9 +70,7 @@ export default {
       await this.$store.dispatch('races/get');
       this.isLoading = false;
     },
-    dateLabel(timestamp) {
-      return date.formatDate(new Date(timestamp.toDate()), 'DD MMMM');
-    },
+    dateLabel,
     timeLabel(timestamp) {
       return date.formatDate(new Date(timestamp.toDate()), 'ore HH:mm');
     },

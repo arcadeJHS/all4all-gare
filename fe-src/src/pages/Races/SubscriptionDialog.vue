@@ -114,6 +114,12 @@ export default {
       return !!this.runner.firstName && !!this.runner.lastName && !!this.runner.yearOfBirth;
     }
   },
+  mounted() {
+    const currentRunner = this.$store.getters['runners/currentRunner'];
+    if (currentRunner) {
+      this.runner = { ...currentRunner };
+    }
+  },
   methods: {
     setYearOptions() {
       const currentYear = (new Date()).getFullYear();

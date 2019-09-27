@@ -3,10 +3,12 @@ import { firestore } from 'src/boot/firebase';
 export default {
   namespaced: true,
 
-  state: {},
+  state: {
+    currentRunner: null
+  },
 
   actions: {
-    saveRunner: async (store, { runnerId, runner }) => {
+    saveRunner: async ({ commit }, { runnerId, runner }) => {
       const docRef = firestore.collection('runners').doc(runnerId);
       const runnerRef = await docRef.get();
 
@@ -18,6 +20,8 @@ export default {
         // does not exists: CREATE
         await docRef.set(runner);
       }
+
+      commit('setCurrentRunner', runner);
     },
 
     getRunnersByRace: async (store, raceId) => {
@@ -35,7 +39,13 @@ export default {
     }
   },
 
-  mutations: {},
+  mutations: {
+    setCurrentRunner: (state, runner) => {
+      state.currentRunner = runner;
+    }
+  },
 
-  getters: {}
+  getters: {
+    currentRunner: state => state.currentRunner
+  }
 };

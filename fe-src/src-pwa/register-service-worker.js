@@ -25,6 +25,10 @@ register(process.env.SERVICE_WORKER_FILE, {
   },
 
   updatefound(/* registration */) {
+    console.log('Update found.');
+  },
+
+  updated(/* registration  */) {
     Notify.create({
       message: 'A new version is available!',
       icon: 'cloud_download',
@@ -35,10 +39,6 @@ register(process.env.SERVICE_WORKER_FILE, {
         window.location.reload(true);
       }
     });
-  },
-
-  updated(/* registration  */) {
-    console.log('New content is available; please refresh.');
   },
 
   offline() {

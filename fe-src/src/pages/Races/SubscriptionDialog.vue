@@ -144,6 +144,12 @@ export default {
     async onOK() {
       this.isSaving = true;
       await this.saveProfile();
+
+      // aggiungere qui tutta la trafila per le notifiche
+      // usare lo store per gestire le abilitazioni e le sottoscrizioni
+      // mettere le funzioni e la logica dentro un modulo in "services"
+      // inizializzare tutto dentro App.vue e qui usare solo dispatch e getters dallo store
+
       this.isSaving = false;
       this.confirmSuccess();
       this.$emit('ok');

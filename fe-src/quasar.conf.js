@@ -145,12 +145,10 @@ module.exports = function (ctx) {
 
     pwa: {
       workboxPluginMode: 'InjectManifest',
-      /*
+      // https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin
       workboxOptions: {
-        skipWaiting: true,
-        clientsClaim: true
+        include: [/\.css$/, /\.js$/]
       },
-      */
       manifest: {
         name: 'ALL4ALL-Gare',
         short_name: 'ALL4ALL-Gare',
